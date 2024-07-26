@@ -18,7 +18,7 @@ const Navbar = () => {
   return (
     <Flex
       as="nav"
-      bg="#88D66C"
+      bg="#03C988"
       w="100%"
       h="80px"
       py={2}
@@ -29,13 +29,14 @@ const Navbar = () => {
       <Image src="/logopic.png" boxSize="10" />
       <Stack 
         direction="row" 
-        spacing={8}
-        fontSize={{ base: "sm", sm: "md" }}
+        spacing={16}
+        fontSize="20px"
         fontFamily="cursive"
         variant="text"
         size="lg"
         color="white"
         textDecor="none"
+        fontWeight="bold"
         >
         <Text 
             cursor="pointer" 

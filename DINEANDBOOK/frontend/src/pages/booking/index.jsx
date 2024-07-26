@@ -1,7 +1,6 @@
 // src/pages/booking.jsx
 import { Box, Heading, Text } from "@chakra-ui/react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+
 
 const Booking = () => (
   <Box>
