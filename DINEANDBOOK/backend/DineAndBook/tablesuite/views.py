@@ -106,6 +106,36 @@ class Carts(generics.ListCreateAPIView):
         user = self.request.user
         Cart.objects.filter(user=user).delete()
         return Response(status=204)
+    
+class UpdateCartItemView(generics.UpdateAPIView):
+    serializer_class = UserCartSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return Cart.objects.filter(user=user)
+
+    def put(self, request, *args, **kwargs):
+        cart_item = self.get_object()
+        quantity = request.data.get('quantity')
+        if quantity is not None:
+            quantity = int(quantity)
+            unit_price = cart_item.menuitem.price
+            cart_item.quantity = quantity
+            cart_item.price = quantity * unit_price
+            cart_item.save()
+            
+            serializer = self.get_serializer(cart_item)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response({'error': 'Quantity not provided'}, status=status.HTTP_400_BAD_REQUEST)
+
+class DeleteCartItemView(generics.DestroyAPIView):
+    serializer_class = UserCartSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return Cart.objects.filter(user=user)
 
 class OrdersView(generics.ListCreateAPIView):
     serializer_class = UserOrdersSerializer
@@ -127,8 +157,8 @@ class OrdersView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        if user.groups.filter(name='Manager').exists():
-            return Order.objects.all()
+        # if user.groups.filter(name='Manager').exists():
+        #     return Order.objects.all()
         return Order.objects.filter(user=user)
 
     def calculate_total(self, cart_items):
@@ -145,6 +175,13 @@ class SingleOrderView(generics.RetrieveUpdateDestroyAPIView):
         if user.groups.filter(name='Manager').exists():
             return Order.objects.all()
         return Order.objects.filter(user=user)
+    
+    def delete(self, request, *args, **kwargs):
+        order = self.get_object()
+        if order.status:
+            return Response({'error': 'Order cannot be deleted'}, status=status.HTTP_400_BAD_REQUEST)
+        return super().delete(request, *args, **kwargs)
+
 
 class ManagerUsersView(generics.ListCreateAPIView):
     serializer_class = UserSerializer

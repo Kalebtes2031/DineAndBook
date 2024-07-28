@@ -100,7 +100,7 @@ class UserCartSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Cart
-        fields = ['user_id', 'menuitem', 'name', 'quantity', 'unit_price', 'price']
+        fields = ['id','user_id', 'menuitem', 'name', 'quantity', 'unit_price', 'price']
         extra_kwargs = {
             'price': {'read_only': True}
         }

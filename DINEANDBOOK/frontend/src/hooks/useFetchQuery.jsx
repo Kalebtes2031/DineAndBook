@@ -141,14 +141,56 @@ export const fetchCartItems = async () => {
   return response.data;
 };
 
+
+
+// Update cart item
+export const updateCartItem = async (id, quantity) => {
+  if (!id) {
+    throw new Error('Item ID is required to update cart item.');
+  }
+  try {
+    const response = await api.put(`activate/cart/${id}/`, { quantity });
+    return response.data;
+  } catch (error) {
+    console.error("Failed to update cart item", error);
+    throw error;
+  }
+};
+
+// Remove cart item
+export const removeCartItem = async (id) => {
+  try {
+    const response = await api.delete(`activate/cart/delete/${id}/`);
+    return response.data;
+  } catch (error) {
+    console.error("Failed to remove cart item", error);
+    throw error;
+  }
+};
+// Fetch orders
+export const fetchOrders = async () => {
+  const response = await api.get('/activate/orders/');
+  return response.data;
+};
 // Place order
 export const placeOrder = async () => {
   const response = await api.post('/activate/orders/');
   return response.data;
 };
 
-// Fetch orders
-export const fetchOrders = async () => {
-  const response = await api.get('/activate/orders/');
+// Delete order
+export const deleteOrder = async (id) => {
+  try {
+    const response = await api.delete(`activate/orders/${id}/`);
+    return response.data;
+  } catch (error) {
+    console.error("Failed to delete order", error);
+    throw error;
+  }
+};
+
+// Example function in useFetchQuery.jsx
+export const fetchOrderItems = async (orderId) => {
+  const response = await api.get(`activate/orders/${orderId}/`);
   return response.data;
 };

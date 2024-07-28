@@ -14,6 +14,8 @@ import Booking from "./pages/booking";
 import About from "./pages/about/index.jsx";
 import Home from "./pages/home/index.jsx";
 import MenuItem from "./pages/menu/MenuItem.jsx";
+import OrderItems from "./pages/orders/OrderItems.jsx";
+
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,7 @@ const router = createBrowserRouter([
       { path: 'menu/:id', element: <MenuItem /> },
       { path: 'cart', element: <Cart /> },
       { path: 'orders', element: <Orders /> },
+      { path: 'orders/:orderId', element: <OrderItems /> },
       { path: 'booking', element: <Booking /> },
       { path: 'about', element: <About /> },
     ],
