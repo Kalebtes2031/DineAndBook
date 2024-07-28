@@ -194,3 +194,16 @@ export const fetchOrderItems = async (orderId) => {
   const response = await api.get(`activate/orders/${orderId}/`);
   return response.data;
 };
+
+
+// Function to submit booking data
+export const submitBooking = async (formData) => {
+  try {
+    const response = await api.post('api/book/', formData);
+    console.log("this is the data:",response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Failed to submit booking', error);
+    throw error;
+  }
+};

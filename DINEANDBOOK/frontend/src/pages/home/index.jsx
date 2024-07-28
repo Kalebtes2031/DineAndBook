@@ -39,7 +39,7 @@ const Home = () => {
           30% Off This Weekend
         </Text>
         <Link
-          href=""
+          href="booking"
           bg="transparent"
           color="rgba(255, 255, 255, 0.9)"
           border="3px solid #fff"
@@ -112,13 +112,13 @@ const Home = () => {
           <Heading as="h2" size="lg" mb={4} >
             Book a table
           </Heading>
-          <Link href="">
+          <Link href="booking">
             <Image src="/bookpic.jpg" alt="Book a Table" borderRadius="md" />
           </Link>
           <Text mt={4} textAlign="left" fontFamily="cursive" fontSize="md" color="gray.600">
             Reserve your table for an Italian, Indian, Japanese, American, French, Chinese, and Mexican dining experience.
           </Text>
-          <Link href="" color="teal.300" fontWeight="bold" fontSize="19px" _hover={{ textDecoration: "underline" }}>
+          <Link href="booking" color="teal.300" fontWeight="bold" fontSize="19px" _hover={{ textDecoration: "underline" }}>
             Book your table now
           </Link>
         </Box>

@@ -26,7 +26,7 @@ const Navbar = () => {
       justify="space-between"
       align="center"
     >
-      <Image src="/logopic.png" boxSize="10" />
+      <Image src="/logopic.png" boxSize="16" borderRadius="100%" />
       <Stack 
         direction="row" 
         spacing={16}
