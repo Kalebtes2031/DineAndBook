@@ -12,6 +12,7 @@ const Footer = () => {
       px={6}
       mt="auto"
       textAlign="center"
+      position="relative"
     >
       <Text fontSize="sm">© 2024 Kabth Restaurant. All rights reserved.</Text>
     </Box>

@@ -13,6 +13,7 @@ import Orders from "./pages/orders";
 import Booking from "./pages/booking";
 import About from "./pages/about/index.jsx";
 import Home from "./pages/home/index.jsx";
+import MenuItem from "./pages/menu/MenuItem.jsx";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
     children: [
       { path: '', element: <Home /> },  // Home page route
       { path: 'menu', element: <Menu /> },
+      { path: 'menu/:id', element: <MenuItem /> },
       { path: 'cart', element: <Cart /> },
       { path: 'orders', element: <Orders /> },
       { path: 'booking', element: <Booking /> },

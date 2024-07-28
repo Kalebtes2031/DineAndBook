@@ -96,9 +96,9 @@ function App() {
     );
 
   return (
-    <Box>
+    <Box display="flex" flexDirection="column" minHeight="100vh">
     <Navbar />
-    <Box as="main" p={4}>
+    <Box as="main" flex={1} p={4}>
       <Outlet />
     </Box>
     <Footer />

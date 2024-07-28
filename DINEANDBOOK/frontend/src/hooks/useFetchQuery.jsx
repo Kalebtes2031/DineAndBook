@@ -113,3 +113,42 @@ export const redirectToLogin = () => {
 export const getAccessToken = () => {
   return localStorage.getItem("accessToken");
 };
+
+// Fetch all menu items
+export const fetchMenuItems = async () => {
+  const response = await api.get("/activate/menu/");
+  return response.data;
+};
+
+// Fetch a single menu item by ID
+export const fetchMenuItem = async (id) => {
+  const response = await api.get(`/activate/menu/${id}/`);
+  return response.data;
+};
+
+// Add item to cart with quantity
+export const addToCart = async (menuitem, quantity) => {
+  try {
+    const response = await api.post("/activate/cart/", { menuitem, quantity });
+    return response.data;
+  } catch (error) {
+    console.error("Failed to add item to cart", error);
+    throw error;
+  }
+};
+export const fetchCartItems = async () => {
+  const response = await api.get('/activate/cart/');
+  return response.data;
+};
+
+// Place order
+export const placeOrder = async () => {
+  const response = await api.post('/activate/orders/');
+  return response.data;
+};
+
+// Fetch orders
+export const fetchOrders = async () => {
+  const response = await api.get('/activate/orders/');
+  return response.data;
+};
