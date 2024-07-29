@@ -19,9 +19,9 @@ const Navbar = () => {
   return (
     <Flex
       as="nav"
-      bg="#48cf53"
+      bg="#242624"
       w="100%"
-      h="80px"
+      h="90px"
       py={2}
       px={6}
       justify="space-between"
@@ -52,54 +52,66 @@ const Navbar = () => {
         fontFamily="cursive"
         variant="text"
         size="lg"
-        color="white"
+        color="#e6ebe6"
         textDecor="none"
         fontWeight="bold"
+        
         >
         <Text 
             cursor="pointer" 
             onClick={() => navigate("/")}
-            _hover={{ color: "#EDF2F7", textDecor: "underline" }}
+            transition="transform 0.3s ease"
+            _hover={{ color: "#EDF2F7",transform: "scale(1.05)", textDecor: "underline" }}
+      
             >
           Home
         </Text>
         <Text 
             cursor="pointer" 
             onClick={() => navigate("/menu")}
-            _hover={{ color: "#EDF2F7", textDecor: "underline" }}
-            >
+            transition="transform 0.3s ease"
+            _hover={{ color: "#EDF2F7",transform: "scale(1.05)", textDecor: "underline" }}            >
           Menu
         </Text>
         <Text 
             cursor="pointer" 
             onClick={() => navigate("/booking")}
-            _hover={{ color: "#EDF2F7", textDecor: "underline" }}
+            transition="transform 0.3s ease"
+            _hover={{ color: "#EDF2F7",transform: "scale(1.05)", textDecor: "underline" }}
             >
           Booking
         </Text>
         <Text 
             cursor="pointer" 
             onClick={() => navigate("/about")}
-            _hover={{ color: "#EDF2F7", textDecor: "underline" }}
-            >
+            transition="transform 0.3s ease"
+            _hover={{ color: "#EDF2F7",transform: "scale(1.05)", textDecor: "underline" }}            >
           About
         </Text>
         <Text 
             cursor="pointer" 
             onClick={() => navigate("/orders")}
-            _hover={{ color: "#EDF2F7", textDecor: "underline" }}
-            >
+            transition="transform 0.3s ease"
+            _hover={{ color: "#EDF2F7",transform: "scale(1.05)", textDecor: "underline" }}            >
           Orders
         </Text>
         <Text 
             cursor="pointer" 
             onClick={() => navigate("/cart")}
-            _hover={{ color: "#EDF2F7", textDecor: "underline" }}
-            >
+            transition="transform 0.3s ease"
+            _hover={{ color: "#EDF2F7",transform: "scale(1.05)", textDecor: "underline" }}            >
           Cart
         </Text>
       </Stack>
-      <Flex gap={2} onClick={handleLogOut} align="center" cursor="pointer">
+      <Flex 
+        color="#e6ebe6"
+        gap={2} 
+        onClick={handleLogOut} 
+        align="center" 
+        cursor="pointer"
+        transition="transform 0.3s ease"
+            _hover={{ color: "#EDF2F7",transform: "scale(1.05)" }}
+        >
         <Icon as={FiLogOut} boxSize="6" />
         <Text fontFamily="unset" fontWeight="bold">Logout</Text>
       </Flex>

@@ -81,12 +81,21 @@ const Home = () => {
           flexDirection="column"
           justifyContent="space-between"
           textAlign="center"
+          
         >
           <Heading as="h2" size="lg" mb={4}>
             Our New Menu
           </Heading>
           <Link href="/menu">
-            <Image src="/menupic.jpg" alt="New Menu" borderRadius="md" />
+            <Image 
+              src="/menupic.jpg" 
+              alt="New Menu"
+               borderRadius="md"
+               transition="transform 0.3s ease"
+                _hover={{
+                  transform: "scale(1.05)",
+                }}
+               />
           </Link>
           <Text textAlign="left" mt={4} fontFamily="cursive" fontSize="md" color="gray.600">
             Our menu consists of 12-15 seasonal items based on Italian, Indian, Japanese, American, French, Chinese, and Mexican culture.
@@ -109,11 +118,19 @@ const Home = () => {
           justifyContent="space-between"
           textAlign="center"
         >
-          <Heading as="h2" size="lg" mb={4} >
+          <Heading as="h2" size="lg" mb={1} >
             Book a table
           </Heading>
           <Link href="booking">
-            <Image src="/bookpic.jpg" alt="Book a Table" borderRadius="md" />
+            <Image 
+              src="/bookpic.jpg" 
+              alt="Book a Table" 
+              borderRadius="md" 
+              transition="transform 0.3s ease"
+              _hover={{
+                transform: "scale(1.05)",
+              }}
+              />
           </Link>
           <Text mt={4} textAlign="left" fontFamily="cursive" fontSize="md" color="gray.600">
             Reserve your table for an Italian, Indian, Japanese, American, French, Chinese, and Mexican dining experience.
@@ -139,7 +156,15 @@ const Home = () => {
           <Heading as="h2" size="lg" mb={4}>
             Opening Hours
           </Heading>
-          <Image src="/chefpic.jpg" alt="Opening Hours" borderRadius="md" />
+          <Image 
+            src="/chefpic.jpg" 
+            alt="Opening Hours" 
+            borderRadius="md" 
+            transition="transform 0.3s ease"
+            _hover={{
+              transform: "scale(1.05)",
+            }}
+            />
           <Text mt={4} textAlign="left" fontFamily="cursive" fontSize="md" color="gray.600">
             The Kabth Restaurant is open 7 days a week.
           </Text>
