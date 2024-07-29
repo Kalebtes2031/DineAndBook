@@ -203,7 +203,7 @@ const BookingForm = () => {
             </Box>
           </Box>
         ) : (
-          <Flex p={2} bg="#14ba49" justifyContent="space-between">
+          <Flex p={3} bg="#14ba49" justifyContent="space-between">
             <Box width="30%">
               <Button
                 onClick={goBack}
