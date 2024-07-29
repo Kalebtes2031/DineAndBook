@@ -125,28 +125,16 @@ const BookingForm = () => {
               overflowX="auto"
               whiteSpace="nowrap"
               px="4"
-              py="4"
-              css={{
-                '&::-webkit-scrollbar': {
-                  height: '8px',
-                },
-                '&::-webkit-scrollbar-track': {
-                  background: '#f1f1f1',
-                  borderRadius: '10px',
-                },
-                '&::-webkit-scrollbar-thumb': {
-                  background: '#888',
-                  borderRadius: '10px',
-                },
-                '&::-webkit-scrollbar-thumb:hover': {
-                  background: '#555',
-                },
-              }}
+              py=""
+              sx={(theme) => theme.styles.global}
             >
               <Box
                 display="inline-flex"
                 alignItems="center"
                 justifyContent="center"
+                minWidth="2000px"
+                p={4}
+                spacing={4}
               >
                 {occasions.map((occasion) => (
                   <Box

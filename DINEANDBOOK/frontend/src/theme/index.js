@@ -19,6 +19,25 @@ const theme = extendTheme({
     },
     // Define other heading styles if needed
   },
+  styles: {
+    global: {
+      // Global scrollbar styling
+      "&::-webkit-scrollbar": {
+        height: "8px",
+      },
+      "&::-webkit-scrollbar-track": {
+        background: "#f1f1f1",
+        borderRadius: "10px",
+      },
+      "&::-webkit-scrollbar-thumb": {
+        background: "teal",
+        borderRadius: "10px",
+      },
+      "&::-webkit-scrollbar-thumb:hover": {
+        background: "darkcyan",
+      },
+    },
+  },
 });
 
 export default theme;

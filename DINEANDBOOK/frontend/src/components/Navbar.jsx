@@ -1,9 +1,10 @@
 // src/components/Navbar.js
 import { Flex, Image, Stack, Text, Icon } from "@chakra-ui/react";
 import { FiLogOut } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "../hooks/useUser";
 import { removeTokens } from "../hooks/useFetchQuery";
+
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const Navbar = () => {
   return (
     <Flex
       as="nav"
-      bg="#03C988"
+      bg="#48cf53"
       w="100%"
       h="80px"
       py={2}
@@ -26,7 +27,24 @@ const Navbar = () => {
       justify="space-between"
       align="center"
     >
-      <Image src="/logopic.png" boxSize="16" borderRadius="100%" />
+      <Link to="/">
+      <Image 
+        src="/logopic.png" 
+        boxSize="20" // Increase the size for better visibility
+        borderRadius="full"
+        border="2px solid teal"
+        boxShadow="lg"
+        objectFit="cover"
+        objectPosition="center" // Center the focus of the image
+        transition="transform 0.2s ease-in-out"
+        _hover={{
+          transform: "scale(1.1)",
+          boxShadow: "xl",
+        }}
+        alt="Logo"
+      />
+      </Link>
+      
       <Stack 
         direction="row" 
         spacing={16}

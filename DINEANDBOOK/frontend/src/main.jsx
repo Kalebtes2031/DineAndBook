@@ -15,6 +15,7 @@ import About from "./pages/about/index.jsx";
 import Home from "./pages/home/index.jsx";
 import MenuItem from "./pages/menu/MenuItem.jsx";
 import OrderItems from "./pages/orders/OrderItems.jsx";
+import theme from "./theme/index.js"
 
 
 const router = createBrowserRouter([
@@ -50,7 +51,7 @@ const queryClient = new QueryClient({
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <UserProvider>
         <QueryClientProvider client={queryClient}>
           <RouterProvider router={router} />
