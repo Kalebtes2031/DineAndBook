@@ -11,9 +11,13 @@ import {
   Link,
   Heading,
   Spinner,
+  Icon,
+  Stack,
+  Flex,
 } from "@chakra-ui/react";
 import { useParams, Link as RouterLink } from "react-router-dom";
 import { fetchOrderItems } from "../../hooks/useFetchQuery";
+import { FaBoxOpen } from "react-icons/fa";
 
 function OrderItems() {
   const { orderId } = useParams();
@@ -36,72 +40,92 @@ function OrderItems() {
   }, [orderId]);
 
   if (loading) {
-    return <Spinner />;
+    return (
+      <Flex justify="center" align="center" h="100vh">
+        <Spinner size="xl" color="teal.500" />
+      </Flex>
+    );
   }
 
   if (!order) {
-    return <Text>No order found.</Text>;
+    return (
+      <Flex justify="center" align="center" h="100vh">
+        <Text fontSize="xl" color="gray.500">
+          No order found.
+        </Text>
+      </Flex>
+    );
   }
 
   return (
-    <Box p={4} maxW="800px" mx="auto">
-      <Text mb={4}>
-        <Link as={RouterLink} to="/orders" color="teal.500" fontWeight="bold">
+    <Box p={6} maxW="900px" mx="auto" bg="gray.50" borderRadius="lg" shadow="md">
+      <Text mb={6} fontSize="lg" color="teal.600">
+      <Link as={RouterLink} to="/" fontWeight="bold" _hover={{ color: "teal.800" }}>
+          Home
+        </Link>{" /"}
+        <Link as={RouterLink} to="/orders" fontWeight="bold" _hover={{ color: "teal.800" }}>
           Orders
         </Link>{" "}
         / {order.id}
       </Text>
-      <Box borderWidth="1px" borderRadius="md" p={4} mb={4}>
-        <Heading as="h1" size="lg" mb={4}>
+      <Box borderWidth="1px" borderRadius="lg" p={6} mb={6} bg="white" shadow="sm">
+        <Heading as="h1" size="lg" mb={4} textAlign="center" color="teal.700">
           Order Details
         </Heading>
-        <Text>
-          <strong>Order ID:</strong> {order.id}
-        </Text>
-        <Text>
-          <strong>Date:</strong> {order.Date}
-        </Text>
-        <Text>
-          <strong>Total:</strong> ${order.total}
-        </Text>
-        <Text>
-          <strong>Status:</strong>{" "}
-          <Text as="span" fontWeight="bold" color={order.status ? "green.500" : "yellow.500"}>
-            {order.status ? "Ordered" : "Pending"}
+        <Stack spacing={2}>
+          <Text fontSize="lg" fontFamily="'Spline Sans Mono', sans-serif">
+            <strong>Order ID:</strong> {order.id}
           </Text>
-        </Text>
-        {order.delivery_crew && (
-          <Text>
-            <strong>Delivery Crew:</strong> {order.delivery_crew}
+          <Text fontSize="lg" fontFamily="'Spline Sans Mono', sans-serif">
+            <strong>Date:</strong> {order.Date}
           </Text>
-        )}
+          <Text fontSize="lg" fontFamily="'Spline Sans Mono', sans-serif">
+            <strong>Total:</strong> ${order.total}
+          </Text>
+          <Text fontSize="lg" fontFamily="'Spline Sans Mono', sans-serif">
+            <strong>Status:</strong>{" "}
+            <Text as="span" fontWeight="bold" color={order.status ? "green.500" : "yellow.500"}>
+              {order.status ? "Ordered" : "Pending"}
+            </Text>
+          </Text>
+          {order.delivery_crew && (
+            <Text fontSize="lg">
+              <strong>Delivery Crew:</strong> {order.delivery_crew}
+            </Text>
+          )}
+        </Stack>
       </Box>
-      <Heading as="h2" size="md" mb={4}>
+      <Heading as="h2" size="md" mb={4} color="teal.700" textAlign="center" fontSize="25px">
         Order Items
       </Heading>
-      <Table variant="striped" colorScheme="teal">
+      <Table variant="simple" colorScheme="teal" bg="white" borderRadius="md" shadow="sm">
         <Thead>
           <Tr>
-            <Th>Item</Th>
-            <Th>Quantity</Th>
-            <Th>Unit Price</Th>
-            <Th>Total Price</Th>
+            <Th fontSize="larger">Item</Th>
+            <Th fontSize="larger">Quantity</Th>
+            <Th fontSize="larger">Unit Price</Th>
+            <Th fontSize="larger">Total Price</Th>
           </Tr>
         </Thead>
         <Tbody>
           {order.order_items.length > 0 ? (
             order.order_items.map((item) => (
               <Tr key={item.id}>
-                <Td>{item.name}</Td>
-                <Td>{item.quantity}</Td>
-                <Td>${item.unit_price}</Td>
-                <Td>${item.price}</Td>
+                <Td fontFamily="'Spline Sans Mono', sans-serif">{item.name}</Td>
+                <Td fontFamily="'Spline Sans Mono', sans-serif">{item.quantity}</Td>
+                <Td fontFamily="'Spline Sans Mono', sans-serif">${item.unit_price}</Td>
+                <Td fontFamily="'Spline Sans Mono', sans-serif">${item.price}</Td>
               </Tr>
             ))
           ) : (
             <Tr>
               <Td colSpan={4} textAlign="center">
-                <Text color="gray.500">No items found.</Text>
+                <Flex direction="column" align="center" justify="center" py={4}>
+                  <Icon as={FaBoxOpen} boxSize={8} color="gray.300" />
+                  <Text color="gray.500" mt={2}>
+                    No items found.
+                  </Text>
+                </Flex>
               </Td>
             </Tr>
           )}

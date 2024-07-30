@@ -1,20 +1,56 @@
-// src/components/Navbar.js
-import { Flex, Image, Stack, Text, Icon } from "@chakra-ui/react";
+import React, { useState, useRef, useEffect } from "react";
+import { Flex, Image, Stack, Text, Icon, Box } from "@chakra-ui/react";
 import { FiLogOut } from "react-icons/fi";
+import { MdOutlineContactPhone } from "react-icons/md";
 import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "../hooks/useUser";
 import { removeTokens } from "../hooks/useFetchQuery";
 
-
 const Navbar = () => {
   const navigate = useNavigate();
   const { user, setUser } = useUser();
+  const [activeItem, setActiveItem] = useState("Home");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   const handleLogOut = () => {
     setUser({});
     removeTokens();
     navigate("/auth/login/");
   };
+
+  const handleItemClick = (item, path) => {
+    setActiveItem(item);
+    navigate(path);
+  };
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+  const menuItems = [
+    { name: "Home", path: "/" },
+    { name: "Menu", path: "/menu" },
+    { name: "Booking", path: "/booking" },
+    { name: "About", path: "/about" },
+    { name: "Orders", path: "/orders" },
+    { name: "Cart", path: "/cart" },
+  ];
+
+  const firstLetter = user.username ? user.username.charAt(0).toUpperCase() : "";
 
   return (
     <Flex
@@ -28,92 +64,113 @@ const Navbar = () => {
       align="center"
     >
       <Link to="/">
-      <Image 
-        src="/logopic.png" 
-        boxSize="20" // Increase the size for better visibility
-        borderRadius="full"
-        border="2px solid teal"
-        boxShadow="lg"
-        objectFit="cover"
-        objectPosition="center" // Center the focus of the image
-        transition="transform 0.2s ease-in-out"
-        _hover={{
-          transform: "scale(1.1)",
-          boxShadow: "xl",
-        }}
-        alt="Logo"
-      />
+        <Image
+          src="/logopic.png"
+          boxSize="20"
+          borderRadius="full"
+          border="2px solid teal"
+          boxShadow="lg"
+          objectFit="cover"
+          objectPosition="center"
+          transition="transform 0.2s ease-in-out"
+          _hover={{
+            transform: "scale(1.1)",
+            boxShadow: "xl",
+          }}
+          alt="Logo"
+        />
       </Link>
-      
-      <Stack 
-        direction="row" 
+
+      <Stack
+        direction="row"
         spacing={16}
         fontSize="20px"
         fontFamily="cursive"
-        variant="text"
-        size="lg"
         color="#e6ebe6"
-        textDecor="none"
         fontWeight="bold"
-        
-        >
-        <Text 
-            cursor="pointer" 
-            onClick={() => navigate("/")}
+      >
+        {menuItems.map((item) => (
+          <Text
+            key={item.name}
+            cursor="pointer"
+            onClick={() => handleItemClick(item.name, item.path)}
             transition="transform 0.3s ease"
-            _hover={{ color: "#EDF2F7",transform: "scale(1.05)", textDecor: "underline" }}
-      
-            >
-          Home
-        </Text>
-        <Text 
-            cursor="pointer" 
-            onClick={() => navigate("/menu")}
-            transition="transform 0.3s ease"
-            _hover={{ color: "#EDF2F7",transform: "scale(1.05)", textDecor: "underline" }}            >
-          Menu
-        </Text>
-        <Text 
-            cursor="pointer" 
-            onClick={() => navigate("/booking")}
-            transition="transform 0.3s ease"
-            _hover={{ color: "#EDF2F7",transform: "scale(1.05)", textDecor: "underline" }}
-            >
-          Booking
-        </Text>
-        <Text 
-            cursor="pointer" 
-            onClick={() => navigate("/about")}
-            transition="transform 0.3s ease"
-            _hover={{ color: "#EDF2F7",transform: "scale(1.05)", textDecor: "underline" }}            >
-          About
-        </Text>
-        <Text 
-            cursor="pointer" 
-            onClick={() => navigate("/orders")}
-            transition="transform 0.3s ease"
-            _hover={{ color: "#EDF2F7",transform: "scale(1.05)", textDecor: "underline" }}            >
-          Orders
-        </Text>
-        <Text 
-            cursor="pointer" 
-            onClick={() => navigate("/cart")}
-            transition="transform 0.3s ease"
-            _hover={{ color: "#EDF2F7",transform: "scale(1.05)", textDecor: "underline" }}            >
-          Cart
-        </Text>
+            color={activeItem === item.name ? "#EDF2F7" : "#e6ebe6"}
+            transform={activeItem === item.name ? "scale(1.05)" : "scale(1)"}
+            textDecor={activeItem === item.name ? "underline" : "none"}
+            _hover={{ color: "#EDF2F7", transform: "scale(1.05)" }}
+          >
+            {item.name}
+          </Text>
+        ))}
       </Stack>
-      <Flex 
-        color="#e6ebe6"
-        gap={2} 
-        onClick={handleLogOut} 
-        align="center" 
-        cursor="pointer"
-        transition="transform 0.3s ease"
-            _hover={{ color: "#EDF2F7",transform: "scale(1.05)" }}
+
+      <Flex align="center" position="relative">
+        <Box
+          ref={dropdownRef}
+          onClick={toggleDropdown}
+          bg="gray.100"
+          w="40px"
+          h="40px"
+          borderRadius="full"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          color="gray.700"
+          fontWeight="bold"
+          cursor="pointer"
+          _hover={{ bg: "gray.300" }}
         >
-        <Icon as={FiLogOut} boxSize="6" />
-        <Text fontFamily="unset" fontWeight="bold">Logout</Text>
+          {firstLetter}
+        </Box>
+        {dropdownOpen && (
+          <Box
+            position="absolute"
+            top="35px"
+            right="2"
+            mt="10px"
+            bg="white"
+            borderRadius="md"
+            boxShadow="md"
+            overflow="hidden"
+            zIndex="10"
+            w="150px"
+            fontFamily="cursive"
+          >
+            <Flex
+              align="center"
+              cursor="pointer"
+              _hover={{ bg: "gray.100" }}
+            >
+            <Icon as={MdOutlineContactPhone} boxSize="6" ml="13px" />
+            <Text
+              onClick={() => handleItemClick("Contact Us", "/contact")}
+              px={3}
+              py={2}
+              cursor="pointer"
+            >
+              Contact Us
+            </Text>
+            </Flex>
+            <Flex 
+              align="center"
+              cursor="pointer"
+              _hover={{ bg: "gray.100" }}
+
+            >
+             <Icon as={FiLogOut} boxSize="6" ml="16px" px={1} mr="3px"
+              py={1} />
+              <Text
+              onClick={handleLogOut}
+              px={2}
+              py={2}
+            >
+              Logout
+            </Text>
+            </Flex>
+            
+          </Box>
+        )}
       </Flex>
     </Flex>
   );

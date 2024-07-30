@@ -16,7 +16,7 @@ import Home from "./pages/home/index.jsx";
 import MenuItem from "./pages/menu/MenuItem.jsx";
 import OrderItems from "./pages/orders/OrderItems.jsx";
 import theme from "./theme/index.js"
-
+import ContactUs from "./pages/contact/index.jsx";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +31,7 @@ const router = createBrowserRouter([
       { path: 'orders/:orderId', element: <OrderItems /> },
       { path: 'booking', element: <Booking /> },
       { path: 'about', element: <About /> },
+      { path: 'contact', element: <ContactUs /> },
     ],
   },
   {
