@@ -9,6 +9,7 @@ import {
   Tr,
   Th,
   Td,
+  Spinner,
   Link,
   Text,
   Heading,
@@ -17,6 +18,7 @@ import { Link as RouterLink } from "react-router-dom";
 
 function Orders() {
   const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadOrders = async () => {
@@ -26,6 +28,8 @@ function Orders() {
         setOrders(data);
       } catch (error) {
         console.error("Failed to fetch orders", error);
+      }finally{
+        setLoading(false);
       }
     };
 
@@ -43,27 +47,66 @@ function Orders() {
     }
   };
 
+  if (loading) {
+    return (
+      <Box textAlign="center" mt={4}>
+        <Spinner size="xl" />
+      </Box>
+    );
+  }
+
   return (
-    <Box p={4} maxW="800px" mx="auto">
-      <Heading as="h1" mb={4}>
+    <Box 
+      p={6}
+      bg="gray.50"
+      borderRadius="md"
+      shadow="lg"
+      // bgImage="url('/bgorder.jpg')"
+      bgSize="cover"
+      bgPosition="top"
+      fontFamily="'Spline Sans Mono', sans-serif"
+      height="600px"
+    >
+      <Heading 
+        as="h1"
+        fontSize="80px"
+        mt="10px"
+        mb={6}
+        color="black"
+        textAlign="center"
+      >
         Your Orders
       </Heading>
-      <Table variant="striped" colorScheme="teal">
-        <Thead>
+      <Table 
+        mx="auto"
+        w="1000px"
+        variant="striped"
+        colorScheme="teal"
+        borderColor="gray.200"
+        borderRadius="lg"
+        boxShadow="0px 4px 12px rgba(0, 0, 0, 0.1)"
+        overflow="hidden"
+        fontFamily="'Spline Sans Mono', sans-serif"
+      >
+        <Thead size="lg" bg="teal.500" color="white" fontWeight="bold" height="70px">
           <Tr>
-            <Th>Order ID</Th>
-            <Th>Date</Th>
-            <Th>Total</Th>
-            <Th>Status</Th>
-            <Th>Details</Th>
-            <Th>Action</Th>
+            <Th borderTopLeftRadius="lg" fontSize="25px">
+              Order ID
+            </Th>
+            <Th fontSize="25px">Date</Th>
+            <Th fontSize="25px">Total</Th>
+            <Th fontSize="25px">Status</Th>
+            <Th fontSize="25px">Details</Th>
+            <Th borderTopRightRadius="lg" fontSize="25px">
+              Action
+            </Th>
           </Tr>
         </Thead>
-        <Tbody>
+        <Tbody bg="white">
           {orders.length > 0 ? (
             orders.map((order) => (
               <Tr key={order.id}>
-                <Td>{order.id}</Td>
+                <Td fontWeight="bold">{order.id}</Td>
                 <Td>{order.Date}</Td>
                 <Td>${order.total}</Td>
                 <Td>

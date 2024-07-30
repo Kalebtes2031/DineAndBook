@@ -62,7 +62,9 @@ const BookingForm = () => {
         status: "success",
         duration: 5000,
         isClosable: true,
+        position: "top",
       });
+      setSelectedOccasion(null);
     } catch (error) {
       console.error("Error:", error.response || error);
       toast({
@@ -73,6 +75,7 @@ const BookingForm = () => {
         isClosable: true,
       });
     }
+
   };
 
   const selectOccasion = (occasion) => {
@@ -203,7 +206,16 @@ const BookingForm = () => {
             </Box>
           </Box>
         ) : (
-          <Flex p={3} bg="#14ba49" justifyContent="space-between">
+          <Flex 
+            p={3} 
+            bgImage="url('/bganniversary3.jpg')"
+            bgSize="1500px 900px"
+            bgPosition="center"
+            bgRepeat="no-repeat"
+            justifyContent="space-between"
+            width="100%"
+            height="75vh"      
+            >
             <Box width="30%">
               <Button
                 onClick={goBack}
@@ -220,8 +232,12 @@ const BookingForm = () => {
                 src={selectedOccasion.image}
                 alt={selectedOccasion.name}
                 borderRadius="md"
+                border="1px solid gray"
                 width="500px"
                 height="400px"
+                _hover={{
+                  transform: "scale(1.05)",
+                }}
               />
               <Box
                 bottom="0"
@@ -242,7 +258,8 @@ const BookingForm = () => {
               borderWidth="1px"
               borderRadius="md"
               boxShadow="lg"
-              bgGradient="linear(to-br, teal.50, blue.100)"
+              bg="white"
+              // bgGradient="linear(to-br, #c4c21b, white, #c4c21b)"
               borderColor="teal.400"
               px="6"
               py="2"
@@ -252,11 +269,11 @@ const BookingForm = () => {
             >
               <form onSubmit={handleSubmit}>
                 <Flex>
-                  <Box width="50%" pr="2">
+                  <Box textStyle="menu" width="50%" pr="2">
                     <FormControl isRequired>
                       <FormLabel>First Name</FormLabel>
                       <Input
-                        borderColor="#9AE6B4"
+                        borderColor="#cfcf21"
                         name="first_name"
                         value={formData.first_name}
                         onChange={handleChange}
@@ -266,7 +283,7 @@ const BookingForm = () => {
                     <FormControl isRequired mt="3">
                       <FormLabel>Last Name</FormLabel>
                       <Input
-                        borderColor="#9AE6B4"
+                        borderColor="#cfcf21"
                         name="last_name"
                         value={formData.last_name}
                         onChange={handleChange}
@@ -276,7 +293,7 @@ const BookingForm = () => {
                     <FormControl isRequired mt="3">
                       <FormLabel>Email</FormLabel>
                       <Input
-                        borderColor="#9AE6B4"
+                        borderColor="#cfcf21"
                         type="email"
                         name="email"
                         value={formData.email}
@@ -287,7 +304,7 @@ const BookingForm = () => {
                     <FormControl isRequired mt="3">
                       <FormLabel>Phone Number</FormLabel>
                       <Input
-                        borderColor="#9AE6B4"
+                        borderColor="#cfcf21"
                         name="phone_number"
                         value={formData.phone_number}
                         onChange={handleChange}
@@ -296,7 +313,7 @@ const BookingForm = () => {
                     <FormControl isRequired mt="3">
                       <FormLabel>Number of People</FormLabel>
                       <Input
-                        borderColor="#9AE6B4"
+                        borderColor="#cfcf21"
                         type="number"
                         name="people"
                         value={formData.people}
@@ -309,7 +326,7 @@ const BookingForm = () => {
                     <FormControl isRequired mt="">
                       <FormLabel>Date</FormLabel>
                       <Input
-                        borderColor="#9AE6B4"
+                        borderColor="#cfcf21"
                         type="date"
                         name="date"
                         value={formData.date}
@@ -320,7 +337,7 @@ const BookingForm = () => {
                     <FormControl isRequired mt="3">
                       <FormLabel>Time</FormLabel>
                       <Input
-                        borderColor="#9AE6B4"
+                        borderColor="#cfcf21"
                         type="time"
                         name="time"
                         value={formData.time}
@@ -331,7 +348,7 @@ const BookingForm = () => {
                     <FormControl isRequired mt="3">
                       <FormLabel>Occasion</FormLabel>
                       <Input
-                        borderColor="#9AE6B4"
+                        borderColor="#cfcf21"
                         value={formData.occasion}
                         readOnly
                       />
@@ -340,7 +357,7 @@ const BookingForm = () => {
                     <FormControl mt="3">
                       <FormLabel>Seating Preference</FormLabel>
                       <Select
-                        borderColor="#9AE6B4"
+                        borderColor="#cfcf21"
                         name="seating_preference"
                         value={formData.seating_preference}
                         onChange={handleChange}
@@ -353,7 +370,7 @@ const BookingForm = () => {
                     <FormControl mt="3">
                       <FormLabel>Additional Comments</FormLabel>
                       <Textarea
-                        borderColor="#9AE6B4"
+                        borderColor="#cfcf21"
                         name="additional_comments"
                         value={formData.additional_comments}
                         onChange={handleChange}
@@ -363,6 +380,7 @@ const BookingForm = () => {
                 </Flex>
                 <Button
                   type="submit"
+                  bg="#969618"
                   colorScheme="teal"
                   mt="4"
                   width="100%"

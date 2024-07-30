@@ -3,7 +3,7 @@ import { extendTheme, Text } from "@chakra-ui/react";
 
 const theme = extendTheme({
   fonts: {
-    heading: "'Markazi Text', serif",
+    heading: "'Markazi Text', serif ,san-serif",
   },
   letterSpacings: {
     heading: "2px",
@@ -19,7 +19,7 @@ const theme = extendTheme({
     },
     // Define other heading styles if needed
   },
-  styles: {
+   styles: {
     global: {
       // Global scrollbar styling
       "&::-webkit-scrollbar": {

@@ -157,27 +157,56 @@ const Cart = () => {
     }
   };
 
+  if (loading) {
+    return (
+      <Box textAlign="center" mt={4}>
+        <Spinner size="xl" />
+        <Text mt={4}>Loading orders...</Text>
+      </Box>
+    );
+  }
+
   return (
-    <Box p={5}>
-      <Heading as="h1" mb={5}>
+    <Box 
+      p={6}
+      bg="gray.50"
+      borderRadius="md"
+      shadow="lg"
+      // bgImage="url('/bgcart.jpg')"
+      bgSize="cover"
+      bgPosition="center"
+      fontFamily="'Spline Sans Mono', sans-serif"
+      height="600px"
+    >
+      <Heading as="h1" fontSize="80px" mt="10px" mb={6} color="whtie" textAlign="center">
         Cart
       </Heading>
       {loading && <Spinner size="xl" />}
       {cartItems.length > 0 ? (
-        <Table variant="simple">
-          <Thead>
+        <Table 
+        mx="auto"
+        w="1000px"
+        variant="striped"
+        colorScheme="teal"
+        borderColor="gray.200"
+        borderRadius="lg"
+        boxShadow="0px 4px 12px rgba(0, 0, 0, 0.1)"
+        overflow="hidden"
+        fontFamily="'Spline Sans Mono', sans-serif"
+        >
+          <Thead size="lg" bg="teal.500" color="white" fontWeight="bold" height="70px">
             <Tr>
-              <Th>Item</Th>
-              <Th>Quantity</Th>
-              <Th>Unit Price</Th>
-              <Th>Total Price</Th>
-              <Th>Action</Th>
+            <Th borderTopLeftRadius="lg" fontSize="25px">Item</Th>
+              <Th fontSize="25px">Quantity</Th>
+              <Th fontSize="25px">Unit Price</Th>
+              <Th fontSize="25px">Total Price</Th>
+              <Th fontSize="25px" borderTopRightRadius="lg">Action</Th>
             </Tr>
           </Thead>
-          <Tbody>
+          <Tbody bg="white">
             {cartItems.map((item) => (
               <Tr key={item.id}>
-                <Td>{item.name}</Td>
+                <Td fontWeight="bold">{item.name}</Td>
                 <Td>
                   <Flex align="center">
                     <IconButton
@@ -187,18 +216,27 @@ const Cart = () => {
                         handleQuantityChange(item.id, item.quantity - 1)
                       }
                       mr={2}
+                      colorScheme="teal"
+                      variant="outline"
                     />
                     <Input
                       value={item.quantity}
-                      readOnly
                       width="50px"
                       textAlign="center"
+                      bg="white"
+                      borderColor="teal.500"
+                      borderWidth="2px"
+                      borderRadius="md"
+                      _focus={{ borderColor: "teal.300" }}
+                      fontFamily="'Spline Sans Mono', sans-serif"
                     />
                     <IconButton
                       icon={<AddIcon />}
                       size="sm"
                       onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
                       ml={2}
+                      colorScheme="teal"
+                      variant="outline"
                     />
                   </Flex>
                 </Td>
@@ -209,6 +247,7 @@ const Cart = () => {
                     colorScheme="red"
                     onClick={() => handleRemove(item.id)}
                     size="sm"
+                    fontFamily="'Spline Sans Mono', sans-serif"
                   >
                     Remove
                   </Button>
@@ -240,10 +279,12 @@ const Cart = () => {
             </Text>
           </Box>
         </Box>
-
-
       )}
-      {cartItems.length > 0 && (
+      <Box 
+        mx="auto"
+        w="1000px"  
+      >
+        {cartItems.length > 0 && (
         <Button
           colorScheme="green"
           mt={5}
@@ -265,6 +306,8 @@ const Cart = () => {
         </Button>
       </Link>
       )}
+      </Box>
+      
       
       
     </Box>

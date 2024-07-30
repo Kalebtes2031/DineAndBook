@@ -156,15 +156,18 @@ const Home = () => {
           <Heading as="h2" size="lg" mb={4}>
             Opening Hours
           </Heading>
-          <Image 
-            src="/chefpic.jpg" 
-            alt="Opening Hours" 
-            borderRadius="md" 
-            transition="transform 0.3s ease"
-            _hover={{
-              transform: "scale(1.05)",
-            }}
-            />
+          <Link href="/about">
+            <Image 
+              src="/chefpic.jpg" 
+              alt="Opening Hours" 
+              borderRadius="md" 
+              transition="transform 0.3s ease"
+              _hover={{
+                transform: "scale(1.05)",
+              }}
+              />
+          </Link>
+          
           <Text mt={4} textAlign="left" fontFamily="cursive" fontSize="md" color="gray.600">
             The Kabth Restaurant is open 7 days a week.
           </Text>
