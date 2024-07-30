@@ -221,7 +221,8 @@ const Cart = () => {
                     />
                     <Input
                       value={item.quantity}
-                      width="50px"
+                      onChange={(e) => handleQuantityChange(item.id, e.target.value)}
+                      width="70px"
                       textAlign="center"
                       bg="white"
                       borderColor="teal.500"

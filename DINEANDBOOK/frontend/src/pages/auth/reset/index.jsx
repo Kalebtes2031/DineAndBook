@@ -84,30 +84,12 @@ import {
               <Image src={Logo} height="70px" onClick={() => navigate("/")} />
             </Flex>
   
-            <Stack spacing={{ base: "2", md: "3" }} textAlign="center">
+            <Stack spacing={{ base: "2", md: "3" }} textAlign="center" mb="10px">
               <Heading size={{ base: "xs", md: "md" }} color="#9E8625">
                 Enter your Email to reset your Password
               </Heading>
             </Stack>
-            <Stack spacing="4" justify="center" direction="row">
-              <Text size="md">Remembered your password? </Text>
-              <Tooltip
-                hasArrow
-                label="Go back to login page"
-                bg="#9E8625"
-                color="white"
-                placement="top"
-              >
-                <Box>
-                  <Icon
-                    color="red"
-                    as={RiArrowGoBackFill}
-                    boxSize={6}
-                    onClick={() => navigate("/auth/login")}
-                  />
-                </Box>
-              </Tooltip>
-            </Stack>
+            
           </Stack>
           <Box
             py={{ base: "0", sm: "0" }}
@@ -144,7 +126,7 @@ import {
                 </FormControl>
               </Stack>
   
-              <Stack spacing="4">
+              <Stack spacing="4" mb="19px" mt="5px">
                 <Button
                   bg="#9E8625"
                   color="white"
@@ -162,6 +144,25 @@ import {
               </Stack>
             </Stack>
           </Box>
+          <Stack spacing="4" justify="center" direction="row">
+              <Text size="md">Remembered your password? </Text>
+              <Tooltip
+                hasArrow
+                label="Go back to login page"
+                bg="#9E8625"
+                color="white"
+                placement="top"
+              >
+                <Box>
+                  <Icon
+                    color="red"
+                    as={RiArrowGoBackFill}
+                    boxSize={6}
+                    onClick={() => navigate("/auth/login")}
+                  />
+                </Box>
+              </Tooltip>
+            </Stack>
         </Stack>
       </Container>
     );

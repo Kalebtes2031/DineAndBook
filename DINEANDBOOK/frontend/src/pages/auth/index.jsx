@@ -84,7 +84,7 @@ const Auth = () => {
       bgSize="cover"
       bgRepeat="no-repeat"
       minH="100vh"
-      bgPosition="center"
+      bgPosition="top"
     >
       {routes}
     </Box>
