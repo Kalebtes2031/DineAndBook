@@ -22,7 +22,25 @@ const Footer = () => {
             © {new Date().getFullYear()} Kabth Restaurant. All rights reserved.
           </Text>
         </Stack>
-        
+        <Stack
+          direction="row"
+          spacing={4}
+          justify={{ base: 'center', md: 'end' }}
+          mb={{ base: 6, md: 0 }}
+        >
+          <Link href="https://www.facebook.com" isExternal>
+            <Icon as={FaFacebookF} boxSize={{ base: 6, md: 8 }} _hover={{ color: 'facebook.400' }} />
+          </Link>
+          <Link href="https://www.twitter.com" isExternal>
+            <Icon as={FaTwitter} boxSize={{ base: 6, md: 8 }} _hover={{ color: 'twitter.400' }} />
+          </Link>
+          <Link href="https://www.instagram.com" isExternal>
+            <Icon as={FaInstagram} boxSize={{ base: 6, md: 8 }} _hover={{ color: 'pink.400' }} />
+          </Link>
+          <Link href="https://www.linkedin.com" isExternal>
+            <Icon as={FaLinkedinIn} boxSize={{ base: 6, md: 8 }} _hover={{ color: 'linkedin.400' }} />
+          </Link>
+        </Stack>
       </Flex>
     </Box>
   );
