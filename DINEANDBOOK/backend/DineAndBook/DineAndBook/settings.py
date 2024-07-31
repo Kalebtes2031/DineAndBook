@@ -221,5 +221,5 @@ DJOSER = {
     'PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND': True
 }
 
-DOMAIN = 'localhost:5173'
+DOMAIN = 'dine-and-book-frontend.vercel.app'
 SITE_NAME = 'DineAndBook'
