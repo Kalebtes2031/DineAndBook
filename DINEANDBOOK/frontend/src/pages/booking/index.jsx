@@ -12,6 +12,7 @@ import {
   Text,
   keyframes,
   Flex,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { submitBooking } from "../../hooks/useFetchQuery";
@@ -75,7 +76,6 @@ const BookingForm = () => {
         isClosable: true,
       });
     }
-
   };
 
   const selectOccasion = (occasion) => {
@@ -87,8 +87,10 @@ const BookingForm = () => {
     setSelectedOccasion(null);
   };
 
+  const formWidth = useBreakpointValue({ base: "100%", md: "60%" });
+
   return (
-    <Box p={4} bg="white">
+    <Box p={4} bg="white" height="100vh" overflow="auto">
       <Box
         maxW="1500px"
         m="0 auto"
@@ -96,10 +98,8 @@ const BookingForm = () => {
         borderRadius="md"
         boxShadow="sm"
         overflow="hidden"
-        width="100vw"
-        height="73vh"
+        height="100%"
         sx={{
-          // Styling for custom scrollbar
           "&::-webkit-scrollbar": {
             width: "12px",
           },
@@ -123,11 +123,11 @@ const BookingForm = () => {
             <Text
               mt="30px"
               mb="30px"
-              fontSize="36px"
+              fontSize={{ base: "24px", md: "36px" }}
               fontWeight="bold"
               fontStyle="italic"
               color="#b0b01e"
-              textAlign=""
+              textAlign="center"
               animation={`${scrollAnimation} 10s linear infinite`}
             >
               Select Your Occasion
@@ -153,14 +153,13 @@ const BookingForm = () => {
                 },
                 scrollbarWidth: "thin",
                 scrollbarColor: "#b0b01e #3d3d35",
-                
               }}
             >
               <Box
                 display="inline-flex"
                 alignItems="center"
                 justifyContent="center"
-                minWidth="2000px" // Ensure this is wider than the parent
+                minWidth="2000px"
                 p={4}
                 spacing={4}
               >
@@ -169,8 +168,8 @@ const BookingForm = () => {
                     key={occasion.name}
                     onClick={() => selectOccasion(occasion)}
                     cursor="pointer"
-                    width="550px"
-                    height="350px"
+                    width={{ base: "300px", md: "550px" }}
+                    height={{ base: "200px", md: "350px" }}
                     overflow="hidden"
                     position="relative"
                     borderRadius="md"
@@ -206,20 +205,20 @@ const BookingForm = () => {
             </Box>
           </Box>
         ) : (
-          <Flex 
-            p={3} 
+          <Flex
+            direction={{ base: "column", md: "row" }}
+            p={3}
             bgImage="url('/bganniversary3.jpg')"
-            bgSize="1500px 900px"
+            bgSize="cover"
             bgPosition="center"
             bgRepeat="no-repeat"
             justifyContent="space-between"
             width="100%"
-            height="75vh"      
-            >
-            <Box width="30%">
+            height="100%"
+          >
+            <Box width={{ base: "100%", md: "30%" }}>
               <Button
                 onClick={goBack}
-                
                 mb="4"
                 leftIcon={<IoMdArrowRoundBack />}
                 alignSelf="flex-start"
@@ -227,14 +226,14 @@ const BookingForm = () => {
                 Back
               </Button>
               <Image
-                ml="40px"
+                ml={{ base: "0", md: "40px" }}
                 mt="10px"
                 src={selectedOccasion.image}
                 alt={selectedOccasion.name}
                 borderRadius="md"
                 border="1px solid gray"
-                width="500px"
-                height="400px"
+                width={{ base: "100%", md: "500px" }}
+                height={{ base: "250px", md: "400px" }}
                 _hover={{
                   transform: "scale(1.05)",
                 }}
@@ -247,7 +246,7 @@ const BookingForm = () => {
                 textAlign="center"
                 py="2"
                 fontWeight="bold"
-                ml="40px"
+                ml={{ base: "0", md: "40px" }}
                 mt="5px"
                 borderRadius="md"
               >
@@ -259,17 +258,17 @@ const BookingForm = () => {
               borderRadius="md"
               boxShadow="lg"
               bg="white"
-              // bgGradient="linear(to-br, #c4c21b, white, #c4c21b)"
               borderColor="teal.400"
               px="6"
               py="2"
-              width="60%"
-              ml="40px"
-              height="518px"
+              width={formWidth}
+              ml={{ base: "0", md: "40px" }}
+              mt={{ base: "4", md: "0" }}
+              height="auto"
             >
               <form onSubmit={handleSubmit}>
-                <Flex>
-                  <Box textStyle="menu" width="50%" pr="2">
+                <Flex direction={{ base: "column", md: "row" }}>
+                  <Box textStyle="menu" width={{ base: "100%", md: "50%" }} pr={{ base: "0", md: "2" }}>
                     <FormControl isRequired>
                       <FormLabel>First Name</FormLabel>
                       <Input
@@ -305,25 +304,31 @@ const BookingForm = () => {
                       <FormLabel>Phone Number</FormLabel>
                       <Input
                         borderColor="#cfcf21"
+                        type="tel"
                         name="phone_number"
                         value={formData.phone_number}
                         onChange={handleChange}
                       />
                     </FormControl>
-                    <FormControl isRequired mt="3">
+                  </Box>
+                  <Box textStyle="menu" width={{ base: "100%", md: "50%" }} pl={{ base: "0", md: "2" }}>
+                    <FormControl isRequired>
                       <FormLabel>Number of People</FormLabel>
-                      <Input
+                      <Select
                         borderColor="#cfcf21"
-                        type="number"
                         name="people"
                         value={formData.people}
                         onChange={handleChange}
-                        min={1}
-                      />
+                      >
+                        {[...Array(10).keys()].map((n) => (
+                          <option key={n + 1} value={n + 1}>
+                            {n + 1}
+                          </option>
+                        ))}
+                      </Select>
                     </FormControl>
-                  </Box>
-                  <Box width="50%" pl="2">
-                    <FormControl isRequired mt="">
+
+                    <FormControl isRequired mt="3">
                       <FormLabel>Date</FormLabel>
                       <Input
                         borderColor="#cfcf21"
@@ -345,15 +350,6 @@ const BookingForm = () => {
                       />
                     </FormControl>
 
-                    <FormControl isRequired mt="3">
-                      <FormLabel>Occasion</FormLabel>
-                      <Input
-                        borderColor="#cfcf21"
-                        value={formData.occasion}
-                        readOnly
-                      />
-                    </FormControl>
-
                     <FormControl mt="3">
                       <FormLabel>Seating Preference</FormLabel>
                       <Select
@@ -362,31 +358,31 @@ const BookingForm = () => {
                         value={formData.seating_preference}
                         onChange={handleChange}
                       >
-                        <option value="indoor">Indoor</option>
-                        <option value="outdoor">Outdoor</option>
+                        <option value="">No Preference</option>
+                        <option value="Indoor">Indoor</option>
+                        <option value="Outdoor">Outdoor</option>
                       </Select>
-                    </FormControl>
-
-                    <FormControl mt="3">
-                      <FormLabel>Additional Comments</FormLabel>
-                      <Textarea
-                        borderColor="#cfcf21"
-                        name="additional_comments"
-                        value={formData.additional_comments}
-                        onChange={handleChange}
-                      />
                     </FormControl>
                   </Box>
                 </Flex>
+
+                <FormControl mt="3">
+                  <FormLabel>Additional Comments</FormLabel>
+                  <Textarea
+                    borderColor="#cfcf21"
+                    name="additional_comments"
+                    value={formData.additional_comments}
+                    onChange={handleChange}
+                  />
+                </FormControl>
+
                 <Button
-                  type="submit"
-                  bg="#969618"
-                  colorScheme="teal"
                   mt="4"
+                  colorScheme="teal"
+                  type="submit"
+                  fontSize={{ base: "md", md: "lg" }}
+                  fontWeight="bold"
                   width="100%"
-                  boxShadow="sm"
-                  _hover={{ boxShadow: "md" }}
-                  _active={{ boxShadow: "lg" }}
                 >
                   Submit Booking
                 </Button>
